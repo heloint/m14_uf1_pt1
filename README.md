@@ -124,3 +124,27 @@ Finalment, fes el merge.
 ---
 
 SOURCE: https://www.kaggle.com/datasets/cdc/foodborne-diseases
+
+
+TO CLEAN THE DATASET:
+1. Delete the "ingredients" and "serotype and genotype" and justify it why => More than 80% is null.
+2. Separate the "food" column to a separate table, "uniqfy" it , then give it ID.
+3. To the cases give num. serie as an ID.
+4. Delete VEERRRRYYY empty rows, which only has 2-3 columns with values.
+5. The rest of the nulls, put "unknown"..
+6. if a row is slightly empty but has numbers, then stays.
+
+
+### Example of the "food table":
+
+caso 1. | chicken
+caso 1. | custard
+
+---
+
+### Example of the "case table":
+caso1. | 1998 | january | california | restaurant | species | status | nº of illnesses | Hospitalizations | Fatalities
+caso2. | 1998 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
+caso3. | 1998 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
+caso4. | 1999 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
+caso5. | 1999 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
