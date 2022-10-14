@@ -122,3 +122,5 @@ Finalment, fes el merge.
 2. Resultat final, Jupyter Notebook o projecte Python amb el codi.
 
 ---
+
+SOURCE: https://www.kaggle.com/datasets/cdc/foodborne-diseases
