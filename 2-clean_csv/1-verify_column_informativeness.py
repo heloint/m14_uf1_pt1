@@ -6,13 +6,6 @@ keep it.
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-def read_csv(path: str, delimiter: str) -> pd.DataFrame:
-    "Reads a csv file and returns it as a pandas DataFrame."
-
-    return pd.read_csv(path, sep=delimiter)  # type: ignore
-
-
 def count_na_percentage(df: pd.DataFrame) -> pd.DataFrame:
     "Calculates what percentage of NA each column has."
 
@@ -38,7 +31,9 @@ def count_na_percentage(df: pd.DataFrame) -> pd.DataFrame:
 def plot_na_percentages(path: str, delimiter: str) -> None:
     "Plots the D.F. of the calculated results as a lineplot."
 
-    df_outbreaks:   pd.DataFrame = read_csv(path, delimiter)
+    pd.set_option('display.max_columns', None)
+
+    df_outbreaks:   pd.DataFrame = pd.read_csv(path, sep=delimiter) #type:ignore
     na_percentages: pd.DataFrame = count_na_percentage(df_outbreaks)
 
     na_percentages.plot(
@@ -50,6 +45,8 @@ def plot_na_percentages(path: str, delimiter: str) -> None:
         marker="o",
     )
 
+    plt.xticks(range(0, len(na_percentages)), na_percentages['columns'])
+    plt.gcf().set_size_inches(16, 5) #type:ignore
     plt.show()
 
 
