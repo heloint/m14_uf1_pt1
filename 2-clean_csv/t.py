@@ -6,7 +6,6 @@ Clean DataFrame from:
 """
 import re
 import pandas as pd
-from typing import Any, Iterable
 from pathlib import Path
 
 
@@ -37,29 +36,6 @@ def split_df(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
     # - Create "cases" dataframe (all columns, except food..).
     df_cases: pd.DataFrame = pd.DataFrame(df.loc[:, df.columns != "food"])
-    
-    return df_cases, df_food
-
-
-def check_if_multi_valued(df: pd.DataFrame) -> Iterable:
-    ''' Loops through the given data frame and if finds any multi-value field in
-    any column, then returns a list Generator with the multi-valued column names.
-    '''
-
-    for _, row in df.iterrows():
-        for column in df.columns:
-            if len(str(row[column]).split(';')) != 1:
-                yield column
-
-
-    return set((column for column in df.columns
-                        if len(str(row[column]).split(';')) != 1) 
-                                        for _, row in df.iterrows())
-
-
-def uniqfy_df_food(df_food: pd.DataFrame) -> pd.DataFrame:
-    ''' "Uniqfies" the food column in the "df_food" data frame.
-    '''
 
     df_food.reset_index(inplace=True)
     cleaned_df_food: dict[str, list[int | str]] = {"case_id": [], "food": []}
@@ -78,7 +54,7 @@ def uniqfy_df_food(df_food: pd.DataFrame) -> pd.DataFrame:
             cleaned_df_food["case_id"] += row["case_id"],  # type: ignore
             cleaned_df_food["food"]    += food,
 
-    return pd.DataFrame(cleaned_df_food)
+    return df_cases, pd.DataFrame(cleaned_df_food)  # type:ignore
 
 
 def write_dataframe_to_csv(path: str, df: pd.DataFrame) -> None:
@@ -96,10 +72,6 @@ if __name__ == "__main__":
     trimmed_df_outbreaks: pd.DataFrame = drop_uninformative_columns(df_outbreaks)
 
     df_cases, df_food = split_df(trimmed_df_outbreaks)
-    t = (check_if_multi_valued(df_food))    
-    print(t)
-    
-    # df_food: pd.DataFrame = uniqfy_df_food(df_food)
-    
-    # write_dataframe_to_csv("../data/cleaned_csv/cases.csv", df_cases)
-    # write_dataframe_to_csv("../data/cleaned_csv/food.csv", df_food)
+
+    write_dataframe_to_csv("../data/cleaned_csv/cases.csv", df_cases)
+    write_dataframe_to_csv("../data/cleaned_csv/food.csv", df_food)
