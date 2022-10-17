@@ -36,6 +36,13 @@ def split_df(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
     # - Create "cases" dataframe (all columns, except food..).
     df_cases: pd.DataFrame = pd.DataFrame(df.loc[:, df.columns != "food"])
+    
+    return df_cases, df_food
+
+
+def uniqfy_df_food(df_food: pd.DataFrame) -> pd.DataFrame:
+    ''' "Uniqfies" the food column in the "df_food" data frame.
+    '''
 
     df_food.reset_index(inplace=True)
     cleaned_df_food: dict[str, list[int | str]] = {"case_id": [], "food": []}
@@ -46,15 +53,16 @@ def split_df(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
         for food in split_food:
             food = food.replace("unspecified", "unknown")
+
             if food == "nan":
                 food = "unknown"
 
             food = food.lower()
 
-            cleaned_df_food["case_id"] += row["case_id"],  # type: ignore
-            cleaned_df_food["food"]    += food,
+            cleaned_df_food["case_id"] += (row["case_id"],) # type: ignore
+            cleaned_df_food["food"]    += (food,)
 
-    return df_cases, pd.DataFrame(cleaned_df_food)  # type:ignore
+    return pd.DataFrame(cleaned_df_food)
 
 
 def write_dataframe_to_csv(path: str, df: pd.DataFrame) -> None:
@@ -72,6 +80,8 @@ if __name__ == "__main__":
     trimmed_df_outbreaks: pd.DataFrame = drop_uninformative_columns(df_outbreaks)
 
     df_cases, df_food = split_df(trimmed_df_outbreaks)
-
-    write_dataframe_to_csv("../data/cleaned_csv/cases.csv", df_cases)
-    write_dataframe_to_csv("../data/cleaned_csv/food.csv", df_food)
+    
+    df_food: pd.DataFrame = uniqfy_df_food(df_food)
+    
+    write_dataframe_to_csv("../data/cleaned_csv/2-question_results/cases.csv", df_cases)
+    write_dataframe_to_csv("../data/cleaned_csv/2-question_results/food.csv", df_food)
