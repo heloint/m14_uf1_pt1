@@ -14,9 +14,9 @@ df_food.replace('unknown', np.NaN)
 
 # Question 3.2.a
 # 2. Now, apply one of these two operations and justify the reason:
-# a) Replace the NaN value of a column with another value. (child feature)
+# a) Replace the NaN value of a column with another value. (fillna feature)
 # ===================================
-df_cases['status'].replace(np.NaN, 'unknown')
+df_cases['status'].fillna('unknown')
 
 
 # Save modified dataframes.
