@@ -81,7 +81,6 @@ Pandas que heu usat.
 2. També heu de mostrar un gràfic.
 3. Resultat final, Jupyter Notebook o projecte Python amb el codi i el gràfic.
 
-
 ---
 
 ## Pregunta 6) Consulta que crei almenys una columna calculada.
@@ -92,14 +91,12 @@ a) camp Apte/NoApte depenent de les notes d’alumnes
 b) càlcul imc a partir del pes i l’alçada.
 3. Resultat final, Jupyter Notebook o projecte Python amb el codi.
 
-
 ---
 
 ## Pregunta 7) Consulta amb dades agrupades per un camp de tipus categòric.
 1. Si no teniu un camp que es pugui convertir a tipus categòric, haureu de crear-ne un.
 2. També heu de mostrar un gràfic de totes les categories.
 3. Resultat final, Jupyter Notebook o projecte Python amb el codi i el gràfic.
-
 
 ---
 
@@ -123,28 +120,6 @@ Finalment, fes el merge.
 
 ---
 
-SOURCE: https://www.kaggle.com/datasets/cdc/foodborne-diseases
 
 
-TO CLEAN THE DATASET:
-1. Delete the "ingredients" and "serotype and genotype" and justify it why => More than 80% is null.
-2. Separate the "food" column to a separate table, "uniqfy" it , then give it ID.
-3. To the cases give num. serie as an ID.
-4. Delete VEERRRRYYY empty rows, which only has 2-3 columns with values.
-5. The rest of the nulls, put "unknown"..
-6. if a row is slightly empty but has numbers, then stays.
-
-
-### Example of the "food table":
-
-caso 1. | chicken
-caso 1. | custard
-
----
-
-### Example of the "case table":
-caso1. | 1998 | january | california | restaurant | species | status | nº of illnesses | Hospitalizations | Fatalities
-caso2. | 1998 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
-caso3. | 1998 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
-caso4. | 1999 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
-caso5. | 1999 | january | california | restaurant | species | status | nº of illnesse  | Hospitalizations | Fatalities
+#### SOURCE: https://www.kaggle.com/datasets/cdc/foodborne-diseases
